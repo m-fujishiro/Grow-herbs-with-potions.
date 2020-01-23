@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 @title ポーションで薬草を育てるゲーム
 
-set 薬草の種=1&set 薬草=1&set 薬草の花=1&set 薬草の実=1&set ポーション=1&set コマンド回数=0&set 金=300
+set 薬草の種=1&set 薬草=1&set 薬草の花=1&set 薬草の実=1&set ポーション=1&set コマンド回数=0&set 金=100
 call :load
 call :save
 
