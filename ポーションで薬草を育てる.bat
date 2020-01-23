@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 @title ポーションで薬草を育てるゲーム
 
 set 薬草の種=1&set 薬草=1&set 薬草の花=1&set 薬草の実=1&set ポーション=1&set コマンド回数=0&set 金=100
-@rem call :load
+call :load
 
 :main
 echo. & echo 薬草の種=%薬草の種% 薬草=%薬草% 薬草の花=%薬草の花% 薬草の実=%薬草の実% ポーション=%ポーション% 金=%金%
@@ -107,6 +107,7 @@ exit /b 0
 @rem 売ったり買ったりすると１日が過ぎる(コマンド回数+3)
 echo. & echo いらっしゃいませ。
 :buy_again
+echo. & echo 薬草の種=%薬草の種% 薬草=%薬草% 薬草の花=%薬草の花% 薬草の実=%薬草の実% ポーション=%ポーション% 金=%金%
 choice /c:sbf /n /m 売る時はsを、買うときはbを、終了するときはfを押してください。
 if %errorlevel%==3 (goto end)
 
@@ -128,24 +129,25 @@ if %所持個数% lss %errorlevel% (
   echo 所持数が足りません。
   goto goto_buy_again
 )
+
 if %選択物%==薬草の種 (
   set /a 金+=%errorlevel%*5
   set /a 薬草の種-=%errorlevel%
 )
 if %選択物%==薬草 (
-  set /a 金+==%errorlevel%*15
+  set /a 金+=%errorlevel%*15
   set /a 薬草-=%errorlevel%
 )
 if %選択物%==薬草の花 (
-  set /a 金+==%errorlevel%*25
+  set /a 金+=%errorlevel%*25
   set /a 薬草の花-=%errorlevel%
 )
 if %選択物%==薬草の実 (
-  set /a 金+==%errorlevel%*40
+  set /a 金+=%errorlevel%*40
   set /a 薬草の実-=%errorlevel%
 )
 if %選択物%==ポーション (
-  set /a 金+==%errorlevel%*50
+  set /a 金+=%errorlevel%*50
   set /a ポーション-=%errorlevel%
 )
 echo %選択物%を%errorlevel%個売却しました。
