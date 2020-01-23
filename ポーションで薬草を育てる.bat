@@ -3,8 +3,9 @@ setlocal enabledelayedexpansion
 
 @title ポーションで薬草を育てるゲーム
 
-set 薬草の種=1&set 薬草=1&set 薬草の花=1&set 薬草の実=1&set ポーション=1&set コマンド回数=0&set 金=100
+set 薬草の種=1&set 薬草=1&set 薬草の花=1&set 薬草の実=1&set ポーション=1&set コマンド回数=0&set 金=300
 call :load
+call :save
 
 :main
 echo. & echo 薬草の種=%薬草の種% 薬草=%薬草% 薬草の花=%薬草の花% 薬草の実=%薬草の実% ポーション=%ポーション% 金=%金%
@@ -178,16 +179,16 @@ goto buy_again
 :end
 set /a コマンド回数+=3
 echo ご利用ありがとうございました。
-exit /b 0
+goto main
 
 :grow_all
 echo 一日が終わり、すべての植物が成長しました。
 set /a 薬草の実+=%薬草の花%
-set /a 薬草の花=%薬草%
-set /a 薬草=%薬草の種%
-set /a 薬草の種=0
+set 薬草の花=%薬草%
+set 薬草=%薬草の種%
+set 薬草の種=0
 set /a 金-=100
-if 金 lss 0(
+if %金% lss 0 (
   echo あなたは破産しました。
   pause & exit
 )
